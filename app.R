@@ -21,8 +21,8 @@ aves_results <- result %>%
             by = join_by(partner == iso3)) %>% 
   mutate(
     ave = format(round(ave * 100, 2), nsmall = 2), 
-    shareones = format(round(shareones * 100), nsmall = 2), 
-    weighted_aves = format(round(weighted_aves * 100), nsmall = 2)) %>% 
+    shareones = format(round(shareones * 100, 2), nsmall = 2), 
+    weighted_aves = format(round(weighted_aves * 100, 2), nsmall = 2)) %>% 
   select(Exporter, Importer, weighted_aves, ave, shareones)
 
 
