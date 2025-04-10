@@ -5,7 +5,7 @@ account: mibra
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 14480107
-bundleId: 10091002
+bundleId: 10091743
 url: https://mibra.shinyapps.io/bilateral_aves/
 version: 1
 asMultiple: FALSE

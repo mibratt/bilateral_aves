@@ -31,6 +31,19 @@ aves_results <- result %>%
 ui <- fluidPage(
   tags$h2("Estimates of bilateral AVEs of NTMs by exporter-importer pair", 
           style = "margin-top: 20px; margin-bottom: 20px; text-align: center;"),
+  tags$details(
+    style = "margin-bottom: 20px;",
+    tags$summary("Click to view citation", style = "cursor: pointer; font-size: 16px; color: #007BFF;"),
+    tags$p(
+      "Bratt, M. (2017). ",
+      tags$a(href = "https://onlinelibrary.wiley.com/doi/abs/10.1111/roie.12297", 
+             target = "_blank", 
+             "Estimating the bilateral impact of nontariff measures on trade", 
+             style = "text-decoration: underline; color: #007BFF;"),
+      ". ",
+      tags$em("Review of International Economics, 25(5), 1105–1129.")
+    )
+  ),
   div(style = "text-align: right; margin-bottom: 10px;",
       downloadButton("download", "Download AVEs (excel)")
       ),
