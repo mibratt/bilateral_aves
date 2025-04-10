@@ -1,33 +1,14 @@
 library(shiny)
 library(tidyverse)
-library(lubridate)
-library(janitor)
-library(reactable)
 library(DT)
+library(haven)
 library(writexl)
 
-# Functions ---------------------------------------------------------------
-
-# Source for the computation
-source("Bilateral AVEs per trading pair.R")
-
-# ColorBrewer-inspired 3-color scale
-BuYlRd <- function(x) rgb(colorRamp(c("#7fb7d7", "#ffffbf", "#fc8d59"))(x), 
-                          maxColorValue = 255)
-
-make_ui <- function(x, var) {
-  gtci_rng <- round(range(x, na.rm = TRUE), digits = 2)
-  sliderInput(var, var, min = gtci_rng[1], max = gtci_rng[2], value = 0)
-}
-
-# Values, vectors and data ------------------------------------------------
+# Load the data file
+load("data/ave_results.Rdata")
 
 # Country codes and names
 country_corr <- readr::read_csv("data/Country list.csv")
-
-country_list <- country_corr %>%
-  arrange(country) %>%
-  pull(country)
 
 # Data frame for app -----------------------------------------------------
 
@@ -61,9 +42,9 @@ server <- function(input, output, session) {
   # Preprocess the table with renamed columns
   processed_data <- aves_results %>%
     rename(
-      `Median AVE (%) for tariff lines with NTMs` = ave,
-      `Share of tariff lines with NTMs` = shareones,
-      `Median AVE (%) for all tariff lines (with or without NTMs)` = weighted_aves
+      `Median AVE (%) for tariff lines where NTM = 1` = ave,
+      `Frequency of tariff lines where NTM = 1 (%)` = shareones,
+      `Median AVE (%) for all tariff lines` = weighted_aves
     )
   
   output$aves <- renderDT(
